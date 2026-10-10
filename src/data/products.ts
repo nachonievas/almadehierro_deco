@@ -23,7 +23,7 @@ export const products: Product[] = [
   {
     id: "mesita",
     name: "Mesita",
-    description: "Mesa auxiliar de hierro con terminación artesanal. Pieza única.",
+    description: "Mesa auxiliar de hierro con terminación artesanal. Pieza única. Medida: 60 x 60 cm.",
     category: "Muebles",
     images: ["/products/mesita/1.jpeg", "/products/mesita/2.jpeg"],
     variants: [{ cash: 74000 }],
@@ -32,7 +32,7 @@ export const products: Product[] = [
   {
     id: "fanales-casita",
     name: "Fanales de Casita",
-    description: "Fanales con forma de casita en hierro. Luz cálida y decorativa.",
+    description: "Fanales con forma de casita en hierro. Luz cálida y decorativa. Alturas: chica 15 cm, grande 25 cm.",
     category: "Iluminación",
     images: [
       "/products/fanales-casita/1.jpeg",
@@ -47,7 +47,7 @@ export const products: Product[] = [
   {
     id: "fanales-x3",
     name: "Fanales x3",
-    description: "Set de tres fanales de hierro. Distintos tamaños para combinar.",
+    description: "Set de tres fanales de hierro en tres alturas: 30, 40 y 50 cm. Para combinar.",
     category: "Iluminación",
     images: [
       "/products/fanales-x3/1.jpeg",
@@ -73,7 +73,7 @@ export const products: Product[] = [
   {
     id: "caracol-porta-espiral",
     name: "Caracol Porta Espiral",
-    description: "Porta espiral con forma de caracol en hierro. Para exterior.",
+    description: "Porta espiral con forma de caracol en hierro. Para exterior. Medida: 15 cm.",
     category: "Deco",
     images: [
       "/products/caracol-porta-espiral/1.jpeg",
@@ -130,7 +130,7 @@ export const products: Product[] = [
   {
     id: "porta-manguera",
     name: "Porta Manguera",
-    description: "Soporte de hierro para manguera. Resistente, para exterior.",
+    description: "Soporte de hierro para manguera. Resistente, para exterior. Medida: 35 cm, profundidad 15 cm.",
     category: "Jardín",
     images: [
       "/products/porta-manguera/1.jpeg",
@@ -149,7 +149,7 @@ export const products: Product[] = [
   {
     id: "tutores-frase",
     name: "Tutores Con Frase",
-    description: "Tutores de hierro con frase para plantas. Detalle para el jardín.",
+    description: "Tutores de hierro con frase para plantas. Detalle para el jardín. Altura: 80 cm.",
     category: "Jardín",
     images: [
       "/products/tutores-frase/1.jpeg",
