@@ -135,8 +135,15 @@ export const products: Product[] = [
     images: [
       "/products/porta-manguera/1.jpeg",
       "/products/porta-manguera/2.jpeg",
+      "/products/porta-manguera/3.jpeg",
+      "/products/porta-manguera/4.jpeg",
+      "/products/porta-manguera/5.jpeg",
+      "/products/porta-manguera/6.jpeg",
     ],
-    variants: [{ cash: 48000 }],
+    variants: [
+      { label: "Común", cash: 48000 },
+      { label: "Óxido", cash: 52000 },
+    ],
   },
   {
     id: "porta-rollo",
@@ -157,6 +164,47 @@ export const products: Product[] = [
       "/products/tutores-frase/3.jpeg",
     ],
     variants: [{ cash: 19500 }],
+  },
+  {
+    id: "tutores-mariposa",
+    name: "Tutores Mariposa",
+    description: "Tutor de hierro con mariposa para plantas. Altura: 80 cm.",
+    category: "Jardín",
+    images: [
+      "/products/tutores-chico-mariposa/1.jpeg",
+      "/products/tutores-chico-mariposa/2.jpeg",
+    ],
+    variants: [{ cash: 12500 }],
+  },
+  {
+    id: "tutores-hongos",
+    name: "Tutores Hongos",
+    description: "Tutor de hierro con hongos para plantas. Detalle para el jardín.",
+    category: "Jardín",
+    images: [
+      "/products/tutores-hongos/1.jpeg",
+      "/products/tutores-hongos/2.jpeg",
+    ],
+    variants: [{ cash: 15400 }],
+  },
+  {
+    id: "tutores-medianos",
+    name: "Tutores Medianos",
+    description: "Tutor de hierro mediano para plantas. Altura: 60 cm.",
+    category: "Jardín",
+    images: [
+      "/products/tutores-medianos/1.jpeg",
+      "/products/tutores-medianos/2.jpeg",
+    ],
+    variants: [{ cash: 7000 }],
+  },
+  {
+    id: "porta-rollo-mandala",
+    name: "Porta Rollo Mandala",
+    description: "Porta rollo / servilletero de hierro con diseño mandala.",
+    category: "Cocina",
+    images: ["/products/porta-rollo-mandala/1.jpeg"],
+    variants: [{ cash: 13000 }],
   },
 ];
 
