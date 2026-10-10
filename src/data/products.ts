@@ -121,9 +121,9 @@ export const products: Product[] = [
     description: "Porta corchos de hierro. Guarda y decora con tus corchos.",
     category: "Cocina",
     images: [
+      "/products/porta-corchos/3.jpeg",
       "/products/porta-corchos/1.jpeg",
       "/products/porta-corchos/2.jpeg",
-      "/products/porta-corchos/3.jpeg",
     ],
     variants: [{ cash: 80000 }],
   },

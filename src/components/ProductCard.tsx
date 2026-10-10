@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
 import { site, waLink } from "@/config/site";
 import { listPrice, formatARS, type Product } from "@/data/products";
@@ -8,9 +8,25 @@ import { WhatsAppIcon } from "./WhatsAppIcon";
 
 export function ProductCard({ product }: { product: Product }) {
   const [active, setActive] = useState(0);
+  const trackRef = useRef<HTMLDivElement>(null);
   const images = product.images.filter(Boolean);
-  const cover = images[active];
+  const multi = images.length > 1;
   const hasPrice = product.variants.length > 0;
+
+  function scrollTo(i: number) {
+    const track = trackRef.current;
+    if (!track) return;
+    const clamped = Math.max(0, Math.min(i, images.length - 1));
+    track.scrollTo({ left: track.clientWidth * clamped, behavior: "smooth" });
+    setActive(clamped);
+  }
+
+  function onScroll() {
+    const track = trackRef.current;
+    if (!track) return;
+    const i = Math.round(track.scrollLeft / track.clientWidth);
+    if (i !== active) setActive(i);
+  }
 
   const priceSummary = hasPrice
     ? product.variants
@@ -26,33 +42,67 @@ export function ProductCard({ product }: { product: Product }) {
   return (
     <article className="group flex flex-col bg-ceniza border border-arena transition-colors hover:border-oxido">
       <div className="relative aspect-[4/5] overflow-hidden bg-arena">
-        {cover ? (
-          <Image
-            src={cover}
-            alt={product.name}
-            fill
-            sizes="(max-width: 768px) 100vw, 33vw"
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
-          />
+        {images.length ? (
+          <div
+            ref={trackRef}
+            onScroll={onScroll}
+            className="flex h-full w-full snap-x snap-mandatory overflow-x-auto scroll-smooth [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          >
+            {images.map((img, i) => (
+              <div key={img} className="relative h-full w-full shrink-0 snap-center">
+                <Image
+                  src={img}
+                  alt={`${product.name} — foto ${i + 1}`}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  className="object-cover"
+                  draggable={false}
+                />
+              </div>
+            ))}
+          </div>
         ) : (
           <Placeholder />
         )}
-        <span className="absolute left-0 top-4 bg-hierro px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-ceniza">
+
+        <span className="pointer-events-none absolute left-0 top-4 bg-hierro px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-ceniza">
           {product.category}
         </span>
-        {images.length > 1 && (
-          <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-2">
-            {images.map((img, i) => (
-              <button
-                key={img}
-                onClick={() => setActive(i)}
-                aria-label={`Ver foto ${i + 1}`}
-                className={`h-2 w-2 rounded-full transition-colors ${
-                  i === active ? "bg-oxido" : "bg-ceniza/70 hover:bg-cobre"
-                }`}
-              />
-            ))}
-          </div>
+
+        {multi && (
+          <>
+            {/* Flechas (desktop / click) */}
+            <button
+              onClick={() => scrollTo(active - 1)}
+              disabled={active === 0}
+              aria-label="Foto anterior"
+              className="absolute left-2 top-1/2 hidden h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-hierro/70 text-ceniza transition-opacity hover:bg-hierro disabled:opacity-0 sm:flex"
+            >
+              ‹
+            </button>
+            <button
+              onClick={() => scrollTo(active + 1)}
+              disabled={active === images.length - 1}
+              aria-label="Foto siguiente"
+              className="absolute right-2 top-1/2 hidden h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-hierro/70 text-ceniza transition-opacity hover:bg-hierro disabled:opacity-0 sm:flex"
+            >
+              ›
+            </button>
+
+            {/* Puntos */}
+            <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-2">
+              {images.map((img, i) => (
+                <button
+                  key={img}
+                  onClick={() => scrollTo(i)}
+                  aria-label={`Ver foto ${i + 1}`}
+                  className={`h-2 w-2 rounded-full transition-colors ${
+                    i === active ? "bg-oxido" : "bg-ceniza/70 hover:bg-cobre"
+                  }`}
+                />
+              ))}
+            </div>
+          </>
         )}
       </div>
 
