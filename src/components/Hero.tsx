@@ -44,6 +44,14 @@ export function Hero() {
             <WhatsAppIcon className="h-4 w-4" />
             Escribinos
           </a>
+          <a
+            href="/lista-precios.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 border border-ceniza/30 px-6 py-3 text-sm font-semibold uppercase tracking-[0.12em] text-ceniza transition-colors hover:border-cobre hover:text-cobre"
+          >
+            Lista de precios (PDF)
+          </a>
         </div>
       </div>
     </section>

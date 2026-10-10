@@ -42,3 +42,6 @@ next-env.d.ts
 
 # fotos fuente (sin optimizar)
 /fotos
+
+# PDF copia local (se sirve desde public/)
+/Alma de Hierro Deco - Lista de Precios.pdf
