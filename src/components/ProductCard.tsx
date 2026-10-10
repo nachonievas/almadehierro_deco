@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 import { site, waLink } from "@/config/site";
 import type { Product } from "@/data/products";
@@ -13,6 +16,10 @@ function formatPrice(price: number) {
 }
 
 export function ProductCard({ product }: { product: Product }) {
+  const [active, setActive] = useState(0);
+  const images = product.images.filter(Boolean);
+  const cover = images[active];
+
   const msg = `Hola ${site.name}! Me interesa "${product.name}" (${formatPrice(
     product.price
   )}). ¿Me pasás más info?`;
@@ -20,9 +27,9 @@ export function ProductCard({ product }: { product: Product }) {
   return (
     <article className="group flex flex-col bg-ceniza border border-arena transition-colors hover:border-oxido">
       <div className="relative aspect-[4/5] overflow-hidden bg-arena">
-        {product.image ? (
+        {cover ? (
           <Image
-            src={product.image}
+            src={cover}
             alt={product.name}
             fill
             sizes="(max-width: 768px) 100vw, 33vw"
@@ -34,6 +41,20 @@ export function ProductCard({ product }: { product: Product }) {
         <span className="absolute left-0 top-4 bg-hierro px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-ceniza">
           {product.category}
         </span>
+        {images.length > 1 && (
+          <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-2">
+            {images.map((img, i) => (
+              <button
+                key={img}
+                onClick={() => setActive(i)}
+                aria-label={`Ver foto ${i + 1}`}
+                className={`h-2 w-2 rounded-full transition-colors ${
+                  i === active ? "bg-oxido" : "bg-ceniza/70 hover:bg-cobre"
+                }`}
+              />
+            ))}
+          </div>
+        )}
       </div>
 
       <div className="flex flex-1 flex-col gap-3 p-5">
