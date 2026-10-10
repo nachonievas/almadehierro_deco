@@ -66,28 +66,29 @@ export function ProductCard({ product }: { product: Product }) {
 
         <div className="pt-1">
           {hasPrice ? (
-            <div className="flex flex-col gap-1.5">
+            <div className="flex flex-col gap-2">
               {product.variants.map((v, i) => (
-                <div key={i} className="flex items-baseline justify-between gap-2">
-                  {v.label && (
-                    <span className="text-xs font-semibold uppercase tracking-[0.12em] text-grafito">
-                      {v.label}
+                <div key={i} className="flex flex-col gap-0.5">
+                  <div className="flex items-baseline gap-2">
+                    {v.label && (
+                      <span className="text-xs font-semibold uppercase tracking-[0.12em] text-grafito">
+                        {v.label}
+                      </span>
+                    )}
+                    <span className="ml-auto inline-flex items-center gap-1.5 bg-cobre/15 px-1.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-oxido-profundo">
+                      Efectivo −10%
                     </span>
-                  )}
-                  <span className="ml-auto font-serif text-2xl italic leading-none text-oxido">
-                    {formatARS(listPrice(v.cash))}
-                  </span>
+                  </div>
+                  <div className="flex items-baseline justify-end gap-2.5">
+                    <span className="font-body text-sm text-grafito/70 line-through decoration-grafito/40">
+                      {formatARS(listPrice(v.cash))}
+                    </span>
+                    <span className="font-serif text-4xl italic leading-none text-oxido">
+                      {formatARS(v.cash)}
+                    </span>
+                  </div>
                 </div>
               ))}
-              <span className="text-[11px] font-semibold uppercase tracking-[0.1em] text-cobre">
-                Efectivo −10%:{" "}
-                {product.variants
-                  .map(
-                    (v) =>
-                      `${v.label ? v.label + " " : ""}${formatARS(v.cash)}`
-                  )
-                  .join(" · ")}
-              </span>
             </div>
           ) : (
             <span className="font-serif text-2xl italic text-oxido">Consultar</span>
