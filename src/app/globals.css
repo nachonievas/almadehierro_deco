@@ -1,0 +1,37 @@
+@import "tailwindcss";
+
+@theme {
+  /* Paleta Alma de Hierro Deco */
+  --color-oxido: #a0461e;
+  --color-oxido-profundo: #6e2e14;
+  --color-cobre: #c9773e;
+  --color-hierro: #1f1c1a;
+  --color-grafito: #4a4541;
+  --color-ceniza: #f3eee7;
+  --color-arena: #d9cfc2;
+
+  --color-background: #d9cfc2;
+  --color-foreground: #1f1c1a;
+
+  --font-display: var(--font-display), sans-serif;
+  --font-serif: var(--font-serif), serif;
+  --font-body: var(--font-body), sans-serif;
+}
+
+body {
+  background: var(--color-arena);
+  color: var(--color-hierro);
+  font-family: var(--font-body);
+}
+
+::selection {
+  background: var(--color-oxido);
+  color: var(--color-ceniza);
+}
+
+/* Utilidad: título forjado */
+.display {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  line-height: 0.92;
+}
