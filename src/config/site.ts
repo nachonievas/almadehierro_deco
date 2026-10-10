@@ -7,7 +7,7 @@ export const site = {
     "Muebles y objetos de decoración en hierro, hechos a mano. Piezas únicas para tu hogar.",
   // Número de WhatsApp en formato internacional, SIN "+" ni espacios.
   // Ej: Argentina 11 2345-6789 => "5491123456789"
-  whatsapp: "5491100000000",
+  whatsapp: "5493517587328",
   instagram: "https://instagram.com/almadehierrodeco",
   email: "contacto@almadehierrodeco.com",
   location: "Buenos Aires, Argentina",
