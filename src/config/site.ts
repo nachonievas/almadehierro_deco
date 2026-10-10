@@ -10,7 +10,7 @@ export const site = {
   whatsapp: "5493517587328",
   instagram: "https://instagram.com/almadehierrodeco",
   email: "contacto@almadehierrodeco.com",
-  location: "Buenos Aires, Argentina",
+  location: "Córdoba, Argentina",
 } as const;
 
 export function waLink(message: string) {

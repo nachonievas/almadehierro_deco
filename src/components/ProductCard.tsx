@@ -3,26 +3,25 @@
 import { useState } from "react";
 import Image from "next/image";
 import { site, waLink } from "@/config/site";
-import type { Product } from "@/data/products";
+import { listPrice, formatARS, type Product } from "@/data/products";
 import { WhatsAppIcon } from "./WhatsAppIcon";
-
-function formatPrice(price: number) {
-  if (price <= 0) return "Consultar";
-  return new Intl.NumberFormat("es-AR", {
-    style: "currency",
-    currency: "ARS",
-    maximumFractionDigits: 0,
-  }).format(price);
-}
 
 export function ProductCard({ product }: { product: Product }) {
   const [active, setActive] = useState(0);
   const images = product.images.filter(Boolean);
   const cover = images[active];
+  const hasPrice = product.variants.length > 0;
 
-  const msg = `Hola ${site.name}! Me interesa "${product.name}" (${formatPrice(
-    product.price
-  )}). ¿Me pasás más info?`;
+  const priceSummary = hasPrice
+    ? product.variants
+        .map(
+          (v) =>
+            `${v.label ? v.label + " " : ""}${formatARS(listPrice(v.cash))} (efectivo ${formatARS(v.cash)})`
+        )
+        .join(", ")
+    : "a consultar";
+
+  const msg = `Hola ${site.name}! Me interesa "${product.name}" (${priceSummary}). ¿Me pasás más info?`;
 
   return (
     <article className="group flex flex-col bg-ceniza border border-arena transition-colors hover:border-oxido">
@@ -64,20 +63,46 @@ export function ProductCard({ product }: { product: Product }) {
         <p className="flex-1 text-sm leading-relaxed text-grafito">
           {product.description}
         </p>
-        <div className="flex items-end justify-between gap-3 pt-2">
-          <span className="font-serif text-3xl italic text-oxido">
-            {formatPrice(product.price)}
-          </span>
-          <a
-            href={waLink(msg)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-oxido px-4 py-2.5 text-sm font-semibold text-ceniza transition-colors hover:bg-oxido-profundo"
-          >
-            <WhatsAppIcon className="h-4 w-4" />
-            Consultar
-          </a>
+
+        <div className="pt-1">
+          {hasPrice ? (
+            <div className="flex flex-col gap-1.5">
+              {product.variants.map((v, i) => (
+                <div key={i} className="flex items-baseline justify-between gap-2">
+                  {v.label && (
+                    <span className="text-xs font-semibold uppercase tracking-[0.12em] text-grafito">
+                      {v.label}
+                    </span>
+                  )}
+                  <span className="ml-auto font-serif text-2xl italic leading-none text-oxido">
+                    {formatARS(listPrice(v.cash))}
+                  </span>
+                </div>
+              ))}
+              <span className="text-[11px] font-semibold uppercase tracking-[0.1em] text-cobre">
+                Efectivo −10%:{" "}
+                {product.variants
+                  .map(
+                    (v) =>
+                      `${v.label ? v.label + " " : ""}${formatARS(v.cash)}`
+                  )
+                  .join(" · ")}
+              </span>
+            </div>
+          ) : (
+            <span className="font-serif text-2xl italic text-oxido">Consultar</span>
+          )}
         </div>
+
+        <a
+          href={waLink(msg)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-2 inline-flex items-center justify-center gap-2 bg-oxido px-4 py-2.5 text-sm font-semibold text-ceniza transition-colors hover:bg-oxido-profundo"
+        >
+          <WhatsAppIcon className="h-4 w-4" />
+          Consultar por WhatsApp
+        </a>
       </div>
     </article>
   );
