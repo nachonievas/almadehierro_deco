@@ -9,8 +9,9 @@
   --color-grafito: #4a4541;
   --color-ceniza: #f3eee7;
   --color-arena: #d9cfc2;
+  --color-crema: #fcf3ee;
 
-  --color-background: #d9cfc2;
+  --color-background: #fcf3ee;
   --color-foreground: #1f1c1a;
 
   --font-display: var(--font-display), sans-serif;
@@ -19,7 +20,7 @@
 }
 
 body {
-  background: var(--color-arena);
+  background: var(--color-crema);
   color: var(--color-hierro);
   font-family: var(--font-body);
 }
